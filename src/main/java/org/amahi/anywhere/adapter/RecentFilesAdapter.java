@@ -1,0 +1,184 @@
+package org.amahi.anywhere.adapter;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.text.format.Formatter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.l4digital.fastscroll.FastScroller;
+import com.squareup.otto.Subscribe;
+
+import org.amahi.anywhere.R;
+import org.amahi.anywhere.bus.AudioMetadataRetrievedEvent;
+import org.amahi.anywhere.bus.BusProvider;
+import org.amahi.anywhere.db.entities.RecentFile;
+import org.amahi.anywhere.task.AudioMetadataRetrievingTask;
+import org.amahi.anywhere.util.Constants;
+import org.amahi.anywhere.util.Mimes;
+import org.amahi.anywhere.util.ServerFileClickListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.RecentFilesViewHolder> implements FastScroller.SectionIndexer {
+
+    final private Context context;
+    final private ServerFileClickListener mListener;
+    private List<RecentFile> recentFiles;
+    public boolean showShimmer = true;
+
+    public RecentFilesAdapter(Context context, List<RecentFile> recentFiles) {
+        this.context = context;
+        this.recentFiles = recentFiles;
+        this.mListener = (ServerFileClickListener) context;
+        BusProvider.getBus().register(this);
+    }
+
+    @NonNull
+    @Override
+    public RecentFilesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new RecentFilesViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_server_file_item, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecentFilesViewHolder holder, int position) {
+        if (showShimmer) {
+            holder.shimmerFrameLayout.startShimmer();
+        } else {
+            stopShimmer(holder);
+            RecentFile file = recentFiles.get(position);
+            setUpViewHolder(file, holder);
+        }
+    }
+
+    private void stopShimmer(@NonNull RecentFilesViewHolder holder) {
+        holder.shimmerFrameLayout.stopShimmer();
+        holder.shimmerFrameLayout.setShimmer(null);
+        holder.fileIconView.setBackground(null);
+        holder.fileTextView.setBackground(null);
+        holder.fileSize.setBackground(null);
+        holder.fileLastVisited.setBackground(null);
+    }
+
+    @Override
+    public CharSequence getSectionText(int selectedPosition) {
+        return recentFiles.get(selectedPosition).getName().subSequence(0, 1);
+    }
+
+    private void setUpViewHolder(RecentFile file, RecentFilesViewHolder fileHolder) {
+        Uri uri = Uri.parse(file.getUri());
+        String name = uri.getQueryParameter("p").substring(uri.getQueryParameter("p").lastIndexOf('/') + 1);
+        String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(name.substring(name.lastIndexOf(".") + 1));
+        String size = Formatter.formatFileSize(context, file.getSize());
+
+        Date d = new Date(file.getVisitTime());
+        SimpleDateFormat dt = new SimpleDateFormat("EEE LLL dd yyyy", Locale.getDefault());
+        String date = dt.format(d);
+
+        fileHolder.fileTextView.setText(name);
+        fileHolder.fileSize.setText(size);
+        fileHolder.fileLastVisited.setText(date);
+
+        if (Mimes.match(mime) == Mimes.Type.IMAGE) {
+            setImageIcon(file, fileHolder.fileIconView);
+        } else if (Mimes.match(mime) == Mimes.Type.AUDIO) {
+            setUpAudioArt(file, fileHolder.fileIconView);
+        } else {
+            fileHolder.fileIconView.setImageResource(R.drawable.ic_file_video);
+        }
+
+        setUpViewHolderListeners(fileHolder);
+    }
+
+    private void setUpViewHolderListeners(RecentFilesViewHolder fileHolder) {
+        fileHolder.itemView.setOnClickListener(view -> mListener.onItemClick(fileHolder.itemView, fileHolder.getAdapterPosition()));
+        fileHolder.moreOptions.setOnClickListener(view -> mListener.onMoreOptionClick(fileHolder.itemView, fileHolder.getAdapterPosition()));
+    }
+
+    private void setImageIcon(RecentFile file, ImageView fileIconView) {
+        Glide.with(fileIconView.getContext())
+            .load(Uri.parse(file.getUri()))
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .centerCrop()
+            .placeholder(R.drawable.ic_file_image)
+            .into(fileIconView);
+    }
+
+    private void setUpAudioArt(RecentFile file, ImageView fileIconView) {
+        new AudioMetadataRetrievingTask(context, Uri.parse(file.getUri()), file.getUniqueKey())
+            .setImageView(fileIconView)
+            .execute();
+    }
+
+    public void replaceWith(List<RecentFile> files) {
+        this.recentFiles = files;
+
+        notifyDataSetChanged();
+    }
+
+    @Subscribe
+    public void onAudioMetadataRetrieved(AudioMetadataRetrievedEvent event) {
+        ImageView imageView = event.getImageView();
+        Bitmap bitmap = event.getAudioMetadata().getAudioAlbumArt();
+        if (bitmap != null && imageView != null) {
+            imageView.setImageBitmap(bitmap);
+        }
+    }
+
+    public void tearDownCallbacks() {
+        BusProvider.getBus().unregister(this);
+    }
+
+    @Override
+    public int getItemCount() {
+        if (showShimmer) {
+            return Constants.SHIMMER_ITEM_NUMBER;
+        } else {
+            return recentFiles.size();
+        }
+    }
+
+    public void removeFile(int selectedPosition) {
+        recentFiles.remove(selectedPosition);
+
+        notifyDataSetChanged();
+    }
+
+    static class RecentFilesViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView fileIconView, moreOptions;
+        TextView fileTextView, fileSize, fileLastVisited;
+        LinearLayout moreInfo;
+        ShimmerFrameLayout shimmerFrameLayout;
+
+        RecentFilesViewHolder(View itemView) {
+            super(itemView);
+            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout_file);
+            fileIconView = itemView.findViewById(R.id.icon);
+            fileTextView = itemView.findViewById(R.id.text);
+            fileSize = itemView.findViewById(R.id.file_size);
+            fileLastVisited = itemView.findViewById(R.id.last_modified);
+            moreInfo = itemView.findViewById(R.id.more_info);
+            moreOptions = itemView.findViewById(R.id.more_options);
+        }
+    }
+
+    public void setShowShimmer(boolean showShimmer) {
+        this.showShimmer = showShimmer;
+    }
+}
