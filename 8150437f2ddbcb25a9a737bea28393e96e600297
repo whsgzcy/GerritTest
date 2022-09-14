@@ -16,6 +16,24 @@
       "message": "有个地方 需要改",
       "revId": "8150437f2ddbcb25a9a737bea28393e96e600297",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5691342_b3984c71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020491
+      },
+      "writtenOn": "2022-09-14T14:50:58Z",
+      "side": 1,
+      "message": "这里不需要提交",
+      "parentUuid": "f7cd7f79_2f2879f4",
+      "revId": "8150437f2ddbcb25a9a737bea28393e96e600297",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
