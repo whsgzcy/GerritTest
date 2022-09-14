@@ -1,4 +1,3 @@
-<h1 align="center"><img alt="Amahi" title="Amahi" src="./src/main/res/drawable-xxhdpi/ic_launcher.png" width="32">  Amahi Android App</h1>
 <p align="center">
     <img alt="Get it on Google Play" title="Google Play" src="http://i.imgur.com/mtGRPuM.png" width="150">
   </a>
