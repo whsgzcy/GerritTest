@@ -110,6 +110,13 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
         builder.setView(view);
     }
 
+    // ifedit
+    // xxx,xxxx,xxxx
+    public void test2() {
+        int a = 10;
+    }
+    // ifend
+
     private String getFileLastOpened() {
         FileInfoRepository fileInfoRepository = new FileInfoRepository(getContext());
         if (fileInfoRepository.getFileInfo(fileUniqueKey) == null) {

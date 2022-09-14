@@ -70,7 +70,7 @@ public class AudioListFragment extends Fragment implements RecyclerViewItemClick
         fastScrollView.setAdapter(adapter);
     }
 
-    private ServerFile getAudioFile() {
+        private ServerFile getAudioFile() {
         return getArguments().getParcelable(Fragments.Arguments.SERVER_FILE);
     }
 
@@ -78,10 +78,13 @@ public class AudioListFragment extends Fragment implements RecyclerViewItemClick
         return getArguments().getParcelableArrayList(Fragments.Arguments.SERVER_FILES);
     }
 
-    private ServerShare getShare() {
+        private ServerShare getShare() {
         return getArguments().getParcelable(Fragments.Arguments.SERVER_SHARE);
     }
 
+
+
+    
     @Override
     public void onItemClick(View view, int position) {
         if (getFiles().indexOf(getAudioFile()) != position) {
