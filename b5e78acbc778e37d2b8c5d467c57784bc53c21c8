@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f5fb87a_6885d062",
+        "filename": "src/main/java/org/amahi/anywhere/fragment/AudioListFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1020491
+      },
+      "writtenOn": "2022-09-14T16:18:05Z",
+      "side": 1,
+      "message": "这里没有改动 请还原",
+      "revId": "b5e78acbc778e37d2b8c5d467c57784bc53c21c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e3c43a_ec63cca9",
+        "filename": "src/main/java/org/amahi/anywhere/fragment/AudioListFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1020491
+      },
+      "writtenOn": "2022-09-14T16:18:05Z",
+      "side": 1,
+      "message": "这里没有改动 请还原",
+      "revId": "b5e78acbc778e37d2b8c5d467c57784bc53c21c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
