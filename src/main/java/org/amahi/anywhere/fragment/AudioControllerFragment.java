@@ -95,6 +95,18 @@ public class AudioControllerFragment extends Fragment {
     }
     // ifend
 
+
+     // ifedit
+    // super.yu@GerritTest,2022/09/15 00:37:00,it is a test mode2
+    public int test1() {
+        int a = 1;
+        int b = 2;
+        int c = 3;
+        return (a + b + c);
+    }
+    // ifend
+
+
     public void connect(AudioService audioService) {
         this.audioService = audioService;
 

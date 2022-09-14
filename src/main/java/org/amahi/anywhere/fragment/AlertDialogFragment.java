@@ -47,6 +47,7 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
             dialogType = getArguments().getInt(Fragments.Arguments.DIALOG_TYPE);
             fileUniqueKey = getArguments().getString(Fragments.Arguments.FILE_UNIQUE_KEY);
             serverFile = getArguments().getParcelable(Fragments.Arguments.SERVER_FILE);
+            android.util.Log.i("whsgzcy", "1");
         }
 
         switch (dialogType) {
@@ -94,6 +95,8 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
         TextView fileName = view.findViewById(R.id.text_file_name);
         TextView fileSize = view.findViewById(R.id.text_file_size);
         TextView fileType = view.findViewById(R.id.text_file_type);
+        android.util.Log.i("whsgzcy", "2");
+
 
         Date d = serverFile.getModificationTime();
         SimpleDateFormat dt = new SimpleDateFormat("EEE LLL dd yyyy", Locale.getDefault());
@@ -131,7 +134,18 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
             .setMessage(getString(R.string.sign_out_message))
             .setPositiveButton(getString(R.string.sign_out_title), this)
             .setNegativeButton(getString(R.string.cancel), this);
+            android.util.Log.i("whsgzcy", "3");
+
     }
+
+     // ifedit
+    // super.yu@GerritTest,2022/09/14 23:40:06,it is a test mode
+    public int test333333333() {
+        int a = 1;
+        int b = 2;
+        return (a - b);
+    }
+    // ifend
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
