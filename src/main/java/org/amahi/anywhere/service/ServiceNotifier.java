@@ -41,12 +41,13 @@ abstract public class ServiceNotifier extends Service {
         Notification notification = notificationBuilder.build();
         int nID = (int) System.currentTimeMillis() % 10000;
         startForeground(nID, notification);
+        android.util.Log.i("whsgzcy", "123");
         return notificationBuilder;
     }
 
-    private static boolean isServiceRunningInForeground(Context context, Class<?> serviceClass) {
+        private static boolean isServiceRunningInForeground(Context context, Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
                 if (service.foreground) {
                     return true;
@@ -56,8 +57,8 @@ abstract public class ServiceNotifier extends Service {
         return false;
     }
 
-    public void stopForegroundService(Context ctx, Service serviceClass, boolean flag) {
-        if (isServiceRunningInForeground(ctx, serviceClass.getClass())) {
+        public void stopForegroundService(Context ctx, Service serviceClass, boolean flag) {
+            if (isServiceRunningInForeground(ctx, serviceClass.getClass())) {
             serviceClass.stopForeground(flag);
         }
     }

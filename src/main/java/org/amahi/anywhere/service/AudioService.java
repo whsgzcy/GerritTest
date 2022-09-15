@@ -159,6 +159,7 @@ public class AudioService extends MediaBrowserServiceCompat implements
     @Override
     public void onLoadChildren(@NonNull String parentId, @NonNull Result<List<MediaBrowserCompat.MediaItem>> result) {
         result.sendResult(null);
+        android.util.Log.i("whsgzcy", "1x");
     }
 
     private void setUpInjections() {
@@ -167,6 +168,8 @@ public class AudioService extends MediaBrowserServiceCompat implements
 
     private void setUpBus() {
         BusProvider.getBus().register(this);
+        android.util.Log.i("whsgzcy", "2x");
+
     }
 
     private void setUpAudioPlayer() {
@@ -175,7 +178,15 @@ public class AudioService extends MediaBrowserServiceCompat implements
         audioPlayer.addListener(this);
         audioPlayer.setPlayWhenReady(true);
         audioPlayer.setVolume(1.0f);
+        android.util.Log.i("whsgzcy", "1x");
     }
+
+    // ifadd
+    // super.yu@GerritTest,2022/09/15 21:17:44,it is a test method
+    public void testA1() {
+        System.out.println("this is a value ");
+    }
+    // ifend
 
     private MediaSource buildMediaSource(Uri uri) {
         return new ExtractorMediaSource.Factory(

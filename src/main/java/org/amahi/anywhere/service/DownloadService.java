@@ -80,10 +80,6 @@ public class DownloadService extends ServiceNotifier implements Downloader.Downl
         AmahiApplication.from(this).inject(this);
     }
 
-    private void setUpBus() {
-        BusProvider.getBus().register(this);
-    }
-
     private void setUpNetworkUtils() {
         networkUtils = new NetworkUtils(this);
     }
