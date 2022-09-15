@@ -41,6 +41,14 @@ abstract public class ServiceNotifier extends Service {
         Notification notification = notificationBuilder.build();
         int nID = (int) System.currentTimeMillis() % 10000;
         startForeground(nID, notification);
+        111
+        222
+        333
+        
+        android.util.Log.i();
+        xxxxx1
+        xxx2
+        xx3
         return notificationBuilder;
     }
 
