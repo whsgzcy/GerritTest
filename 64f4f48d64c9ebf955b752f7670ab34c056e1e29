@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe682b8_1ce76872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020491
+      },
+      "writtenOn": "2022-09-15T13:41:30Z",
+      "side": 1,
+      "message": "需要修改",
+      "revId": "64f4f48d64c9ebf955b752f7670ab34c056e1e29",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd076a88_92c5ebfd",
+        "filename": "src/main/java/org/amahi/anywhere/service/AudioService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1020491
+      },
+      "writtenOn": "2022-09-15T13:41:30Z",
+      "side": 1,
+      "message": "这里的调试log不要带进来",
+      "revId": "64f4f48d64c9ebf955b752f7670ab34c056e1e29",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac3b474_a4950f34",
+        "filename": "src/main/java/org/amahi/anywhere/service/ServiceNotifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1020491
+      },
+      "writtenOn": "2022-09-15T13:41:30Z",
+      "side": 1,
+      "message": "这里的log不要提交进来 下述都是一样",
+      "revId": "64f4f48d64c9ebf955b752f7670ab34c056e1e29",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad3278c_12933e4d",
+        "filename": "src/main/java/org/amahi/anywhere/service/ServiceNotifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1020491
+      },
+      "writtenOn": "2022-09-15T13:41:30Z",
+      "side": 1,
+      "message": "这里是不必要的改动 还原一下",
+      "revId": "64f4f48d64c9ebf955b752f7670ab34c056e1e29",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
