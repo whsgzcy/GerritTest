@@ -177,6 +177,13 @@ public class AudioService extends MediaBrowserServiceCompat implements
         audioPlayer.setVolume(1.0f);
     }
 
+    // ifadd
+    // super.yu@GerritTest,2022/09/15 21:17:44,it is a test method
+    public void testA1() {
+        System.out.println("this is a value ");
+    }
+    // ifend
+
     private MediaSource buildMediaSource(Uri uri) {
         return new ExtractorMediaSource.Factory(
             new DefaultHttpDataSourceFactory(Identifier.getUserAgent(this)))
