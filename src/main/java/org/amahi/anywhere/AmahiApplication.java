@@ -156,15 +156,21 @@ public class AmahiApplication extends Application {
         int importanceDownload = NotificationManager.IMPORTANCE_LOW;
         int importanceUpload = NotificationManager.IMPORTANCE_LOW;
 
-        NotificationChannel uploadChannel = new NotificationChannel(UPLOAD_CHANNEL_ID, getString(R.string.upload_channel), importanceUpload);
-        uploadChannel.setDescription(getString(R.string.upload_channel_desc));
+        android.util.Log.i("whsgzcy", "123");
+        NotificationChannel downloadChannell = new NotificationChannel(DOWNLOAD_CHANNEL_ID, getString(R.string.download_channel), importanceDownload);
+        downloadChannell.setDescription(getString(R.string.download_channel_desc));
+        android.util.Log.i("whsgzcy", "123");
 
-        NotificationChannel downloadChannel = new NotificationChannel(DOWNLOAD_CHANNEL_ID, getString(R.string.download_channel), importanceDownload);
-        downloadChannel.setDescription(getString(R.string.download_channel_desc));
-
+        android.util.Log.i("whsgzcy", "456");
         // Once the channel is registered, it's importance and behaviour can't be changed
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(uploadChannel);
         notificationManager.createNotificationChannel(downloadChannel);
+        android.util.Log.i("whsgzcy", "456");
+
+        NotificationChannel uploadChannelTest = new NotificationChannel(UPLOAD_CHANNEL_ID, getString(R.string.upload_channel), importanceUpload);
+        uploadChannelTest.setDescription(getString(R.string.upload_channel_desc));
+
+        
     }
 }
