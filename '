@@ -1,0 +1,13 @@
+a1
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch dev
+# Your branch is up to date with 'origin/dev'.
+#
+# Changes to be committed:
+#	new file:   ceshi1.txt
+#	modified:   src/main/java/org/amahi/anywhere/view/ClickableViewPager.java
+#	new file:   t1.png
+#
