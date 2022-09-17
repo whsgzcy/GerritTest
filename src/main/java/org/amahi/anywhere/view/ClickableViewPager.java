@@ -34,6 +34,8 @@ public class ClickableViewPager extends ViewPager {
     private OnClickListener mOnClickListener;
     private GestureDetector tapGestureDetector;
 
+    private String tt = "xxx";
+
     public ClickableViewPager(Context context) {
         super(context);
 
